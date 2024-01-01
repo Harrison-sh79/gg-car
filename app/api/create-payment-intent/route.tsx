@@ -6,28 +6,28 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as any, {
   apiVersion: "2023-10-16", // Replace with the desired Stripe API version
 });
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+// export default async function handler(
+//   req: NextApiRequest,
+//   res: NextApiResponse
+// ) {
   
-  if (req.method !== 'POST') {
-    console.log(req.method)
-    return res.status(405).end(); // Method Not Allowed
-  }
+//   if (req.method !== 'POST') {
+//     console.log(req.method)
+//     return res.status(405).end(); // Method Not Allowed
+//   }
 
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1000, // Replace with the actual amount in cents
-      currency: 'usd', // Replace with the actual currency code
-    });
+//   try {
+//     const paymentIntent = await stripe.paymentIntents.create({
+//       amount: 1000, // Replace with the actual amount in cents
+//       currency: 'usd', // Replace with the actual currency code
+//     });
 
-    res.json({ clientSecret: paymentIntent.client_secret });
-  } catch (error: any) {
-    console.error('Error creating PaymentIntent:', error.message);
-    res.status(500).json({ error: 'Failed to create PaymentIntent' });
-  }
-}
+//     res.json({ clientSecret: paymentIntent.client_secret });
+//   } catch (error: any) {
+//     console.error('Error creating PaymentIntent:', error.message);
+//     res.status(500).json({ error: 'Failed to create PaymentIntent' });
+//   }
+// }
 
 export async function POST(request: NextRequest){
   const data = await request.json()
